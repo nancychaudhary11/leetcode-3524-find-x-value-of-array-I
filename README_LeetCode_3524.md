@@ -26,28 +26,28 @@ For every `num`:
 
 ```java
 class Solution {
-    public int[] resultArray(int[] nums, int k) {
-        int[] ans = new int[k];
-        int[] dp = new int[k];
+    public long[] resultArray(int[] nums, int k) {
+        long[] ans = new long[k];
+        long[] dp = new long[k];
 
         for (int num : nums) {
-            int[] next = new int[k];
+            long[] newDp = new long[k];
 
             int rem = num % k;
-            next[rem]++;
+            newDp[rem]++;
 
             for (int r = 0; r < k; r++) {
                 if (dp[r] > 0) {
                     int newRem = (r * rem) % k;
-                    next[newRem] += dp[r];
+                    newDp[newRem] += dp[r];
                 }
             }
 
             for (int r = 0; r < k; r++) {
-                ans[r] += next[r];
+                ans[r] += newDp[r];
             }
 
-            dp = next;
+            dp = newDp;
         }
 
         return ans;
